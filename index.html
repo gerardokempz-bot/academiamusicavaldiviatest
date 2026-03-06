@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia de Música Valdivia</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'academy-red': '#D32F2F',
+                        'academy-black': '#111111',
+                        'academy-gray': '#F8F8F8',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #ffffff; color: #111; }
+        h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; }
+        
+        .hero-section {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://image.qwenlm.ai/public_source/e2b37058-a790-4be6-a7f4-7eb1b347fb20/16048b0d5-39b3-4219-8e8b-3adb8048fce2.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .reel-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .reel-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        .reel-scroll::-webkit-scrollbar-thumb {
+            background: #D32F2F;
+            border-radius: 3px;
+        }
+
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .modal:not(.hidden) {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .whatsapp-btn {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+        }
+
+        .gallery-thumb {
+            transition: transform 0.3s ease;
+        }
+        .gallery-thumb:hover {
+            transform: scale(1.05);
+        }
+
+        .class-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- menu navegacion -->
+    <nav class="fixed w-full z-50 bg-white/99 backdrop-blur-sm shadow-md transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="image">
+                <img src="/imagenes academia/logoSINFONDO.png" width="35%">
+            </div>
+            <a href="#" class="text-2xl font-bold font-serif tracking-wider text-academy-black">
+                <span class="text-academy-red"> </span>
+            </a>
+            <div class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wide">
+                <a href="#inicio" class="hover:text-academy-red transition-colors">Inicio</a>
+                <a href="#clases" class="hover:text-academy-red transition-colors">Clases</a>
+                <a href="#reels" class="hover:text-academy-red transition-colors">Reels</a>
+                <a href="#galeria" class="hover:text-academy-red transition-colors">Galería</a>
+                <a href="#fundador" class="hover:text-academy-red transition-colors">Fundador</a>
+                <a href="#contacto" class="px-5 py-2.5 bg-academy-black text-white rounded-full hover:bg-academy-red transition-colors">Contacto</a>
+            </div>
+            <button class="md:hidden text-2xl text-academy-black" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 flex flex-col space-y-4 shadow-lg">
+            <a href="#inicio" class="block hover:text-academy-red">Inicio</a>
+            <a href="#clases" class="block hover:text-academy-red">Clases</a>
+            <a href="#reels" class="block hover:text-academy-red">Reels</a>
+            <a href="#galeria" class="block hover:text-academy-red">Galería</a>
+            <a href="#fundador" class="block hover:text-academy-red">Fundador</a>
+            <a href="#contacto" class="block text-academy-red font-bold">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="inicio" class="hero-section h-screen flex items-center justify-center text-center px-4">
+        
+        <div class="max-w-4xl text-white">
+            <div>
+            <img src="/imagenes academia/logo-HERO-invertido-sin fondo(1).png" width="100%">
+        </div>
+            <p class="text-gray-100 text-lg mb-10 max-w-2xl mx-auto font-light">Formación musical de élite con profesores profesionales. Clases personalizadas para todos los niveles.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#clases" class="px-8 py-4 bg-academy-red text-white font-semibold text-sm uppercase tracking-widest hover:bg-white hover:text-academy-red transition-all duration-300 border-2 border-academy-red">
+                    Ver Clases
+                </a>
+                <a href="https://wa.me/1234567890" target="_blank" class="px-8 py-4 bg-white text-academy-black font-semibold text-sm uppercase tracking-widest hover:bg-academy-red hover:text-white transition-all duration-300 border-2 border-white flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Contactar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes -->
+    <section id="clases" class="py-24 bg-white">
+            <div class="text-center mb-16">
+                <p class="text-academy-red font-semibold text-sm uppercase tracking-widest mb-3">Nuestros Programas</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-academy-black">Clases Disponibles</h2>
+                <div class="w-24 h-1 bg-academy-red mx-auto"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto font-light">Programas diseñados por profesionales para llevar tu técnica e interpretación al siguiente nivel.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Iniciación y exploración -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('iniciacionyexploracion')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/iniciacion.jpg" alt="iniciación y exploración" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Iniciación y exploración</h3>
+                            <span class="text-academy-red text-sm font-semibold">Destacado</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">El mejor inicio para descubrir el amor por la música.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Todas las edades</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            
+                <!-- Canto -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('canto')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/canto3cortada.jpg" alt="Clase de Canto" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Canto</h3>
+                            <span class="text-academy-red text-sm font-semibold">Destacado</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">Técnica vocal, respiración, proyección y estilo único en estudio profesional.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Todas las edades</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Piano -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('piano')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/piano5.jpg" alt="Clase de Piano" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Piano</h3>
+                            <span class="text-academy-red text-sm font-semibold">Popular</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">Domina el teclado con técnica rigurosa y expresión artística. Clásico y contemporáneo.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Desde 8 años</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guitarra y Ukelele -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('guitarra')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/grupal2recortada.jpg" alt="Clase de Guitarra" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Guitarra clásica y electroacústica</h3>
+                            <span class="text-academy-red text-sm font-semibold">Nuevo</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">Acústica y electroacústica. Fingerstyle, armonía, acordes composición acompañamiento y técnicas avanzadas.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Desde 10 años</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ukele -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('ukelele')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/ukelele.jpg" alt="Clase de ukelele" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Ukelele</h3>
+                            <span class="text-academy-red text-sm font-semibold">Destacado</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">Técnica, Armonía, acordes y composición.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Todas las edades</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bajo -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('bajo')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/bajorecortada.jpg" alt="Clase de bajo" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Bajo</h3>
+                            <span class="text-academy-red text-sm font-semibold">Destacado</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">Armonía, técnicas avanzadas, este instrumento es el corazón de toda banda.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Desde los 8 años</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Violín -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('violin')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/violin4recortada.jpg" alt="Clase de violin" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Violín</h3>
+                            <span class="text-academy-red text-sm font-semibold">Destacado</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">Técnicas de arco e instrumento, armonía y ensambles. Domina el arte de las cuerdas frotadas a través del violín.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Todas las edades</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batería -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('bateria')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/bateriarecortada.jpg" alt="Clase de bateria" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Batería</h3>
+                            <span class="text-academy-red text-sm font-semibold">Destacado</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">
+                            La batería es el motor de la música. Proporciona la estructura rítmica, la columna vertebral y el tempo.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Todas las edades</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formación de bandas -->
+                <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('formaciondebandas')">
+                    <div class="h-64 overflow-hidden">
+                        <img src="/imagenes academia/formaciondebandasrecordata.jpg" alt="Clase de formacion de bandas" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-2xl font-bold text-academy-black">Formación de bandas</h3>
+                            <span class="text-academy-red text-sm font-semibold">Nuevo</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 font-light">Talleres y asesoría informativa.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-500 text-xs uppercase tracking-wide">Desde los 10 años</span>
+                            <span class="text-academy-red font-semibold text-sm flex items-center gap-2 group">
+                                Ver más <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                               
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Reels -->
+    <section id="reels" class="py-24 bg-academy-gray">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+                <div>
+                    <p class="text-academy-red font-semibold text-sm uppercase tracking-widest mb-3">En Acción</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-academy-black">Nuestros Reels</h2>
+                    <div class="w-24 h-1 bg-academy-red mt-4"></div>
+                </div>
+                <div class="flex space-x-3">
+                    <button class="w-12 h-12 rounded-full border-2 border-academy-black flex items-center justify-center hover:bg-academy-black hover:text-white transition" onclick="scrollReels('left')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="w-12 h-12 rounded-full border-2 border-academy-black flex items-center justify-center hover:bg-academy-black hover:text-white transition" onclick="scrollReels('right')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="reelContainer" class="reel-scroll flex space-x-6 overflow-x-auto pb-6 snap-x scroll-smooth">
+                <!-- Reel 1 -->
+                <div class="min-w-[280px] md:min-w-[320px] bg-academy-black rounded-2xl overflow-hidden shadow-xl snap-center relative group h-[520px]">
+                    <iframe
+                    allowfullscreen 
+                    width="320"
+                    height="600"
+                    src="https://youtube.com/embed/lhcRyTl8qKk" 
+                    frameborder="0">
+                   </iframe>
+                </div>
+
+                <!-- Reel 2 -->
+                <div class="min-w-[280px] md:min-w-[320px] bg-academy-black rounded-2xl overflow-hidden shadow-xl snap-center relative group h-[520px]">
+                    <iframe
+                    allowfullscreen 
+                    width="320"
+                    height="600"
+                    src="https://youtube.com/embed/gqGmWOTc87M" 
+                    frameborder="0">
+                   </iframe>
+                </div>
+
+                <!-- Reel 3 -->
+                <div class="min-w-[280px] md:min-w-[320px] bg-academy-black rounded-2xl overflow-hidden shadow-xl snap-center relative group h-[520px]">
+                    <iframe
+                    allowfullscreen 
+                    width="320"
+                    height="600"
+                    src="https://youtube.com/embed/YjTYuLH--EI" 
+                    frameborder="0">
+                   </iframe>
+                </div>
+
+                <!-- Reel 4 -->
+                <!--<div class="min-w-[280px] md:min-w-[320px] bg-academy-black rounded-2xl overflow-hidden shadow-xl snap-center relative group h-[520px]">
+                    <img src="https://image.qwenlm.ai/public_source/e2b37058-a790-4be6-a7f4-7eb1b347fb20/17228584d-8c97-45a3-bbfd-1f9f855e35b4.png" class="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-2 border-white group-hover:scale-110 transition">
+                            <i class="fas fa-play text-white text-3xl ml-1"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-5 w-full bg-gradient-to-t from-black via-black/50 to-transparent">
+                        <p class="text-white font-bold text-lg">Concierto Anual</p>
+                        <p class="text-gray-300 text-sm">@virtuoso_academy</p>
+                        <div class="flex items-center gap-3 mt-2">
+                            <span class="text-white text-xs"><i class="fas fa-heart text-academy-red"></i> 5.2K</span>
+                            <span class="text-white text-xs"><i class="fas fa-comment"></i> 412</span>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de la academia -->
+    <section id="galeria" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-academy-red font-semibold text-sm uppercase tracking-widest mb-3">Nuestras Instalaciones</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-academy-black">Galería de la Academia</h2>
+                <div class="w-24 h-1 bg-academy-red mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[200px]">
+                <div class="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-2xl">
+                    <img src="/imagenes academia/grupal8.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Sala Principal">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <p class="text-white font-semibold">Saludos de parte de la academia</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl">
+                    <img src="/imagenes academia/academia1.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Estudio de Grabación">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <p class="text-white font-semibold">Mi primera clase</p>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl">
+                    <img src="/imagenes academia/losprofesrecortada.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Aula de Piano">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <p class="text-white font-semibold">Los profes</p>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                <!--<div class="lg:col-span-3 relative group overflow-hidden rounded-2xl">
+                    <img src="/imagenes academia/valdivia.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Sala de Conciertos">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <p class="text-white font-semibold">Sala de Conciertos</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Fundador -->
+    <section id="fundador" class="py-24 bg-academy-gray">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="w-full lg:w-1/2">
+                    <div class="relative">
+                        <div class="absolute -top-6 -left-6 w-full h-full border-2 border-academy-red rounded-2xl z-0"></div>
+                        <img src="/imagenes academia/joel poblete.jpg" alt="Fundador" class="relative z-10 w-full rounded-2xl shadow-2xl">
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-academy-red rounded-2xl -z-10"></div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <p class="text-academy-red font-semibold text-sm uppercase tracking-widest mb-4">Nuestro Fundador</p>
+                    <h2 class="text-4xl md:text-5xl font-bold text-academy-black mb-6">Profesor Joel Poblete</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed font-light">
+                        Con más de 25 años de experiencia en la escena musical Valdiviana, el maestro Joel fundó la Academia de música Valdivia con una misión clara: hacer que el don músical este al alcance de todos.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed font-light">
+                        "La música no es solo sonido, es el lenguaje del alma. Mi objetivo es darles a mis estudiantes las herramientas para que su alma pueda hablar con claridad."
+                    <blockquote class="border-l-4 border-academy-red pl-6 mb-8 italic text-gray-700">
+                        
+                    </blockquote>
+                    <div class="flex items-center gap-4">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60'%3E%3Cpath d='M20,30 Q40,10 60,30 T100,30 T140,30 T180,30' stroke='%23D32F2F' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Firma" class="h-12 opacity-60">
+                        <div>
+                            <p class="font-bold text-academy-black">Joel Poblete</p>
+                            <p class="text-gray-500 text-sm">Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-academy-red font-semibold text-sm uppercase tracking-widest mb-3">Contáctanos</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-academy-black">¿Listo para Empezar?</h2>
+                <div class="w-24 h-1 bg-academy-red mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contacto Info -->
+                <div class="space-y-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 bg-academy-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-academy-red text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-academy-black mb-2">Ubicación</h4>
+                            <p class="text-gray-600 font-light">Av. de la Música 123, Zona Cultural<br>Ciudad de Valdivia</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 bg-academy-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone text-academy-red text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-academy-black mb-2">Teléfono</h4>
+                            <p class="text-gray-600 font-light">+56 123 456 789</p>
+                            <p class="text-gray-600 font-light">+56 987 654 321</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 bg-academy-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-academy-red text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-academy-black mb-2">Email</h4>
+                            <p class="text-gray-600 font-light">academiademusicavaldivia@gmail.com</p>
+                            <p class="text-gray-600 font-light">consultas@academiademusicavaldivia.com</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 bg-academy-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-clock text-academy-red text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-academy-black mb-2">Horario</h4>
+                            <p class="text-gray-600 font-light">Lunes - Viernes: 9:00 AM - 8:00 PM</p>
+                            <p class="text-gray-600 font-light">Sábados: 10:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <h4 class="font-bold text-academy-black mb-4">Síguenos en Redes</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 rounded-full bg-academy-black flex items-center justify-center text-white hover:bg-academy-red transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-academy-black flex items-center justify-center text-white hover:bg-academy-red transition">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-academy-black flex items-center justify-center text-white hover:bg-academy-red transition">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-academy-black flex items-center justify-center text-white hover:bg-academy-red transition">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario contacto -->
+                <div class="bg-academy-gray rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-academy-black mb-6">Envíanos un Mensaje</h3>
+                    <form onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-academy-red focus:ring-1 focus:ring-academy-red" placeholder="Tu nombre" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                                <input type="tel" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-academy-red focus:ring-1 focus:ring-academy-red" placeholder="Tu teléfono" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-academy-red focus:ring-1 focus:ring-academy-red" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Interés</label>
+                            <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-academy-red focus:ring-1 focus:ring-academy-red">
+                                <option>Selecciona una clase</option>
+                                <option>Piano</option>
+                                <option>Guitarra</option>
+                                <option>Canto</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
+                            <textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-academy-red focus:ring-1 focus:ring-academy-red h-32" placeholder="¿En qué podemos ayudarte?" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-academy-black text-white py-4 rounded-lg font-semibold uppercase tracking-wider hover:bg-academy-red transition">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie -->
+    <footer class="bg-academy-black text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold font-serif mb-6">ACADEMIA DE MÚSICA VALDIVIA<span class="text-academy-red">.</span></h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+                        Formando a la próxima generación de músicos profesionales con pasión, disciplina y excelencia desde 2010.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-academy-red">Enlaces Rápidos</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#clases" class="hover:text-academy-red transition">Clases Disponibles</a></li>
+                        <li><a href="#fundador" class="hover:text-academy-red transition">Sobre Nosotros</a></li>
+                        <li><a href="#galeria" class="hover:text-academy-red transition">Instalaciones</a></li>
+                        <li><a href="#contacto" class="hover:text-academy-red transition">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-academy-red">Clases</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm font-light">
+                        <li><a href="#" class="hover:text-academy-red transition">Piano</a></li>
+                        <li><a href="#" class="hover:text-academy-red transition">Guitarra</a></li>
+                        <li><a href="#" class="hover:text-academy-red transition">Canto</a></li>
+                        <li><a href="#" class="hover:text-academy-red transition">Teoría Musical</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-academy-red">News</h4>
+                    <p class="text-gray-400 text-sm mb-4 font-light">Recibe noticias sobre conciertos y talleres.</p>
+                    <form class="flex flex-col gap-3" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+                        <input type="email" placeholder="Tu email" class="bg-gray-800 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-1 focus:ring-academy-red font-light" required>
+                        <button class="bg-academy-red text-white px-4 py-3 rounded-lg font-semibold uppercase tracking-wider hover:bg-white hover:text-academy-red transition">Suscribirse</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm font-light">
+                <p>&copy; 2026 Academia de Música Valdivia. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/56982802442?text=Hola,%20me%20interesa%20información%20sobre%20las%20clases%20de%20música" target="_blank" class="whatsapp-btn fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-white text-4xl"></i>
+    </a>
+
+    <!-- Class Detail Modal -->
+    <div id="classModal" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
+        <div class="bg-white w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-academy-red hover:text-white transition shadow-lg">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div class="relative">
+                    <img id="modalImg" src="" alt="" class="w-full h-64 lg:h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-academy-red text-white px-4 py-2 text-xs font-bold uppercase rounded-full">
+                        Nivel Profesional
+                    </div>
+                </div>
+                <div class="p-8 lg:p-12">
+                    <p class="text-academy-red font-semibold text-sm uppercase tracking-widest mb-3">Detalle de Clase</p>
+                    <h3 id="modalTitle" class="text-3xl lg:text-4xl font-bold font-serif text-academy-black mb-6">Titulo Clase</h3>
+                    <p id="modalDesc" class="text-gray-600 mb-8 leading-relaxed font-light">Descripcion detallada...</p>
+                    
+                    <div class="mb-8">
+                        <h5 class="font-bold text-sm uppercase tracking-wider text-academy-black mb-4">Lo que aprenderás:</h5>
+                        <ul id="modalList" class="space-y-3 text-gray-600 font-light">
+                            <!-- List items injected via JS -->
+                        </ul>
+                    </div>
+
+                    <div class="mb-8">
+                        <h5 class="font-bold text-sm uppercase tracking-wider text-academy-black mb-4">Galería de la Clase</h5>
+                        <div class="grid grid-cols-3 gap-3">
+                            <img id="galleryImg1" src="" class="w-full h-24 object-cover rounded-lg cursor-pointer gallery-thumb">
+                            <img id="galleryImg2" src="" class="w-full h-24 object-cover rounded-lg cursor-pointer gallery-thumb">
+                            <img id="galleryImg3" src="" class="w-full h-24 object-cover rounded-lg cursor-pointer gallery-thumb">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/56982802442?text=Hola,%20quiero%20inscribirme%20en%20la%20clase" target="_blank" class="flex-1 bg-[#25D366] text-white py-4 rounded-lg font-semibold uppercase tracking-wider hover:opacity-90 transition flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp"></i> Inscribirse
+                        </a>
+                        <button onclick="closeModal()" class="flex-1 border-2 border-academy-black text-academy-black py-4 rounded-lg font-semibold uppercase tracking-wider hover:bg-academy-black hover:text-white transition">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Class Data
+        const classData = {
+            iniciacionyexploracion: {
+                title: "Iniciación y exploración",
+                desc: "El objetivo es despertar el interés y la curiosidad de los niños por la música, mientras desarrollan sus habilidades básicas.",
+                img: "/imagenes academia/iniciacion2.jpg",
+                list: [
+                    "Reconocer y aprender ritmos",
+                    "Desarrollo de la coordinación",
+                    "Iniciación en la audición músical",
+                    "Iniciación en la expresión creativa",
+                    "Iniciación en instrumentos para su elección según sus intereses y habilidades"
+                ],
+                gallery: [
+                    "/imagenes academia/iniciacion1.jpg",
+                    "/imagenes academia/iniciacion3.jpg",
+                    "/imagenes academia/iniciacion4.jpg"
+                ]
+            },
+            canto: {
+                title: "Técnica Vocal y Performance",
+                desc: "Desarrolla tu instrumento natural. Trabajamos respiración diafragmática, apoyo, resonancia y extensión vocal. Incluye clases de actuación escénica, manejo del micrófono y grabación profesional.",
+                img: "/imagenes academia/canto2.jpg",
+                list: [
+                    "Respiración Diafragmática y Apoyo",
+                    "Estilos: Lírico, Musical Theatre, Pop, Jazz",
+                    "Cuidado y Salud Vocal",
+                    "Interpretación Escénica",
+                    "Técnica de Micrófono y Grabación"
+                ],
+                gallery: [
+                    "/imagenes academia/canto2.jpg",
+                    "/imagenes academia/bajo2.jpg",
+                    "/imagenes academia/canto.jpeg"
+                ]
+            },
+            piano: {
+                title: "Piano Clásico y Contemporáneo",
+                desc: "Nuestro programa de piano abarca desde la técnica fundamental hasta la interpretación avanzada de repertorio clásico y contemporáneo. Las clases se imparten en pianos de cola Steinway & Sons en estudios acústicamente tratados.",
+                img: "/imagenes academia/piano4.jpg",
+                list: [
+                    "Técnica de Hanon y Czerny para desarrollo digital",
+                    "Teoría Musical Avanzada y Armonía",
+                    "Improvisación y Jazz",
+                    "Preparación para exámenes de conservatorio",
+                    "Interpretación de repertorio clásico y moderno"
+                ],
+                gallery: [
+                    "/imagenes academia/piano.jpeg",
+                    "/imagenes academia/piano2.jpg",
+                    "/imagenes academia/piano3.jpg"
+                ]
+            },
+            guitarra: {
+                title: "Guitarra clásica y electroacústica",
+                desc: "Explora la versatilidad de la guitarra. Desde la delicadeza del fingerstyle clásico hasta lo contemporaneo. Enfocado en la composición, la teoría armónica y la performance en vivo.",
+                img: "/imagenes academia/guitarra5.JPEG",
+                list: [
+                    "Dominio técnico y teórico",
+                    "Interpretación y repertorio",
+                    "Ritmo músical y ejecución",
+                    "Técnicas de Púa y Fingerstyle",
+                    "Acordes y Armonía Moderna",
+                    "Creatividad e improvisación",
+                    "Solfeo Rítmico y Melódico",
+                    "Desarrollo artístico",
+                    "Performance Escénica"
+                ],
+                gallery: [
+                    "/imagenes academia/guitarra2.JPEG",
+                    "/imagenes academia/guitarra.JPEG",
+                    "imagenes academia/guitarra4.JPEG"
+                ]
+            },
+            ukelele: {
+                title: "Ukelele",
+                desc: "Aprende y fortalece tus habilidades en el curso de ukelele.",
+                img: "/imagenes academia/guitarra5.JPEG",
+                list: [
+                    "Dominio técnico y teórico",
+                    "Interpretación y repertorio",
+                    "Ritmo músical y ejecución",
+                    "Técnicas de dedos",
+                    "Acordes y Armonía Moderna",
+                    "Creatividad e improvisación",
+                    "Solfeo Rítmico y Melódico",
+                    "Desarrollo artístico",
+                    "Performance Escénica"
+                ],
+                gallery: [
+                    "/imagenes academia/guitarra2.JPEG",
+                    "/imagenes academia/guitarra.JPEG",
+                    "imagenes academia/guitarra4.JPEG"
+                ]
+            },
+            bajo: {
+                title: "Bajo",
+                desc: "Se el corazon de tu banda con nuestro método moderno y directo. Mejora tu técnica y conocimientos de manera fácil y rápida.",
+                img: "/imagenes academia/bajo.jpg",
+                list: [
+                    "Dominio técnico y teórico",
+                    "Interpretación y repertorio",
+                    "Ritmo músical y ejecución",
+                    "Técnicas avanzadas de bajo",
+                    "Armonía Moderna",
+                    "Creatividad e improvisación",
+                    "Solfeo Rítmico y Melódico",
+                    "Desarrollo artístico",
+                    "Performance Escénica"
+                ],
+                gallery: [
+                    "/imagenes academia/bajo1.jpg",
+                    "/imagenes academia/bajo2.jpg",
+                    "/imagenes academia/bajo3.jpg"
+                ]
+            },
+            violin: {
+                title: "Violín",
+                desc: "Amas el violín? En nuestra academia aprenderas con clases para niños, adultos y principiantes. Clásico, folclor o música popular.",
+                img: "/imagenes academia/violin1.jpeg",
+                list: [
+                    "Dominio técnico y teórico",
+                    "Manejo del arco",
+                    "Interpretación y repertorio",
+                    "Ritmo músical y ejecución",
+                    "Armonía Moderna",
+                    "Creatividad e improvisación",
+                    "Solfeo Rítmico y Melódico",
+                    "Desarrollo artístico",
+                    "Performance Escénica"
+                ],
+                gallery: [
+                    "/imagenes academia/violin3.jpg",
+                    "/imagenes academia/violin-cuadro.jpg",
+                    "/imagenes academia/violin2.jpg"
+                ]
+            },
+            bateria: {
+                title: "Batería",
+                desc: "Aprenderás teoría desde cero, técnicas, patrones rítmicos, coordinación, relajación y cuidados.",
+                img: "/imagenes academia/bateria4.jpg",
+                list: [
+                    "Técnica fundamental",
+                    "Lectura y teoría",
+                    "Repertorio y ritmos",
+                    "Musicalidad y ejecución",
+                    "Creatividad e improvisación"
+                ],
+                gallery: [
+                    "/imagenes academia/bateria1.jpg",
+                    "/imagenes academia/bateria3.jpg",
+                    "/imagenes academia/bateria2.jpeg"
+                ]
+            },
+            formaciondebandas: {
+                title: "Formación de bandas",
+                desc: "Nuestro programa de piano abarca desde la técnica fundamental hasta la interpretación avanzada de repertorio clásico y contemporáneo. Las clases se imparten en pianos de cola Steinway & Sons en estudios acústicamente tratados.",
+                img: "/imagenes academia/galeria1.jpg",
+                list: [
+                    "Técnica de Hanon y Czerny para desarrollo digital",
+                    "Teoría Musical Avanzada y Armonía",
+                    "Improvisación y Jazz",
+                    "Preparación para exámenes de conservatorio",
+                    "Interpretación de repertorio clásico y moderno"
+                ],
+                gallery: [
+                    "/imagenes academia/formaciondebandas.jpg",
+                    "/imagenes academia/grupal1.jpg",
+                    "/imagenes academia/canto.jpeg"
+                ]
+            }
+            
+            
+        };
+
+        // Modal Functions
+        function openModal(type) {
+            const data = classData[type];
+            if (!data) return;
+
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalDesc').innerText = data.desc;
+            document.getElementById('modalImg').src = data.img;
+            
+            const listContainer = document.getElementById('modalList');
+            listContainer.innerHTML = '';
+            data.list.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<i class="fas fa-check-circle text-academy-red mr-3"></i> ${item}`;
+                listContainer.appendChild(li);
+            });
+
+            document.getElementById('galleryImg1').src = data.gallery[0];
+            document.getElementById('galleryImg2').src = data.gallery[1];
+            document.getElementById('galleryImg3').src = data.gallery[2];
+
+            document.getElementById('classModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('classModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('classModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Reels Scroll
+        function scrollReels(direction) {
+            const container = document.getElementById('reelContainer');
+            const scrollAmount = 350;
+            if (direction === 'left') {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
