@@ -99,6 +99,69 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
+        .time-slot {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .time-slot:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .time-slot.selected {
+            background: linear-gradient(135deg, #D32F2F 0%, #5e1002 100%);
+            color: rgb(255, 255, 255);
+            border-color: transparent;
+        }
+        
+        .time-slot.available {
+            border: 2px solid #D32F2F;
+            background: #D32F2F;
+        }
+        
+        .time-slot.unavailable {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f3f4f6;
+        }  
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -107,7 +170,7 @@
     <nav class="fixed w-full z-50 bg-white/99 backdrop-blur-sm shadow-md transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="image">
-                <img src="imagenes academia/logoSINFONDO.png" width="35%">
+                <img src="/imagenes academia/logoSINFONDO.png" width="35%">
             </div>
             <a href="#" class="text-2xl font-bold font-serif tracking-wider text-academy-black">
                 <span class="text-academy-red"> </span>
@@ -139,7 +202,7 @@
         
         <div class="max-w-4xl text-white">
             <div>
-            <img src="imagenes academia/logo-HERO-invertido-sin fondo(1).png" width="100%">
+            <img src="/imagenes academia/logo-HERO-invertido-sin fondo(1).png" width="100%">
         </div>
             <p class="text-gray-100 text-lg mb-10 max-w-2xl mx-auto font-light">Formación musical de élite con profesores profesionales. Clases personalizadas para todos los niveles.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -166,7 +229,7 @@
                 <!-- Iniciación y exploración -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('iniciacionyexploracion')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/iniciacion.jpg" alt="iniciación y exploración" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/iniciacion.jpg" alt="iniciación y exploración" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -187,7 +250,7 @@
                 <!-- Canto -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('canto')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/canto3cortada.jpg" alt="Clase de Canto" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/canto3cortada.jpg" alt="Clase de Canto" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -206,7 +269,7 @@
                 <!-- Piano -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('piano')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/piano5.jpg" alt="Clase de Piano" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/piano5.jpg" alt="Clase de Piano" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -226,7 +289,7 @@
                 <!-- Guitarra y Ukelele -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('guitarra')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/grupal2recortada.jpg" alt="Clase de Guitarra" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/grupal2recortada.jpg" alt="Clase de Guitarra" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -246,7 +309,7 @@
                 <!-- Ukele -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('ukelele')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/ukelele.jpg" alt="Clase de ukelele" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/ukelele.jpg" alt="Clase de ukelele" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -265,7 +328,7 @@
                 <!-- Bajo -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('bajo')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/bajorecortada.jpg" alt="Clase de bajo" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/bajorecortada.jpg" alt="Clase de bajo" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -285,7 +348,7 @@
                 <!-- Violín -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('violin')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/violin4recortada.jpg" alt="Clase de violin" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/violin4recortada.jpg" alt="Clase de violin" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -305,7 +368,7 @@
                 <!-- Batería -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('bateria')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/bateriarecortada.jpg" alt="Clase de bateria" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/bateriarecortada.jpg" alt="Clase de bateria" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -326,7 +389,7 @@
                 <!-- Formación de bandas -->
                 <div class="class-card bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer border border-gray-100" onclick="openModal('formaciondebandas')">
                     <div class="h-64 overflow-hidden">
-                        <img src="imagenes academia/formaciondebandasrecordata.jpg" alt="Clase de formacion de bandas" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                        <img src="/imagenes academia/formaciondebandasrecordata.jpg" alt="Clase de formacion de bandas" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -433,19 +496,19 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[200px]">
                 <div class="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-2xl">
-                    <img src="imagenes academia/grupal8.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Sala Principal">
+                    <img src="/imagenes academia/grupal8.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Sala Principal">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                         <p class="text-white font-semibold">Saludos de parte de la academia</p>
                     </div>
                 </div>
                 <div class="relative group overflow-hidden rounded-2xl">
-                    <img src="imagenes academia/academia1.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Estudio de Grabación">
+                    <img src="/imagenes academia/academia1.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Estudio de Grabación">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                         <p class="text-white font-semibold">Mi primera clase</p>
                     </div>
                 </div>
                 <div class="relative group overflow-hidden rounded-2xl">
-                    <img src="imagenes academia/losprofesrecortada.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Aula de Piano">
+                    <img src="/imagenes academia/losprofesrecortada.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Aula de Piano">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                         <p class="text-white font-semibold">Los profes</p>
                     </div>
@@ -472,7 +535,7 @@
                 <div class="w-full lg:w-1/2">
                     <div class="relative">
                         <div class="absolute -top-6 -left-6 w-full h-full border-2 border-academy-red rounded-2xl z-0"></div>
-                        <img src="imagenes academia/joel poblete.jpg" alt="Fundador" class="relative z-10 w-full rounded-2xl shadow-2xl">
+                        <img src="/imagenes academia/joel poblete.jpg" alt="Fundador" class="relative z-10 w-full rounded-2xl shadow-2xl">
                         <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-academy-red rounded-2xl -z-10"></div>
                     </div>
                 </div>
@@ -572,9 +635,41 @@
                         </div>
                     </div>
                 </div>
-
+                        <!-- Horarios Section -->
+                <section id="horarios" class="py-20 px-4 bg-white">
+                    <div class="max-w-7xl mx-auto">
+                     <div class="text-center mb-16">
+                           <h2 class="text-4xl font-bold text-gray-800 mb-4">Horarios Disponibles</h2> 
+                           <p class="text-xl text-gray-600">Selecciona el día y hora que prefieras</p>
+                     </div>
+            
+                     <div class="glass-effect rounded-2xl p-8 shadow-lg">
+                        <!-- Days Selector -->
+                        <div class="flex flex-wrap gap-2 mb-8 justify-center">
+                        <button onclick="selectDay('lunes')" class="day-btn" data-day="lunes">Lunes</button>
+                                <button onclick="selectDay('martes')" class="day-btn" data-day="martes">Martes</button>
+                                <button onclick="selectDay('miercoles')" class="day-btn" data-day="miercoles">Miércoles</button>
+                                <button onclick="selectDay('jueves')" class="day-btn" data-day="jueves">Jueves</button>
+                                <button onclick="selectDay('viernes')" class="day-btn" data-day="viernes">Viernes</button>
+                                <button onclick="selectDay('sabado')" class="day-btn" data-day="sabado">Sábado</button>
+                            </div>
+                
+                            <!-- Time Slots -->
+                            <div id="timeSlots" class="grid grid-cols-3 md:grid-cols-6 gap-4">
+                                <!-- Time slots will be dynamically generated -->
+                            </div>
+                
+                            <div class="mt-8 text-center">
+                                <p class="text-gray-600 mb-4">
+                                    <span class="inline-block w-4 h-4 bg-academy-red border-2 border-academy-black rounded mr-2"></span> Disponible
+                                    <span class="inline-block w-4 h-4 bg-gray-200 rounded ml-4 mr-2"></span> No disponible
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <!-- Formulario contacto -->
-                <div class="bg-academy-gray rounded-2xl p-8">
+          <!--      <div class="bg-academy-gray rounded-2xl p-8">
                     <h3 class="text-2xl font-bold text-academy-black mb-6">Envíanos un Mensaje</h3>
                     <form onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -609,10 +704,127 @@
                             Enviar Mensaje
                         </button>
                     </form>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
+
+    <!-- Reserva Section -->
+    <section id="reservar" class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                
+                <p class="text-xl text-academy-black opacity-90 font-awesome">Completa el formulario para confirmar tu reserva</p>
+            </div>
+            
+            <div class="glass-effect rounded-2xl p-8 shadow-lg">
+                <form id="bookingForm" onsubmit="handleBooking(event)">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Nombre Completo *</label>
+                            <input type="text" id="nombre" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition" placeholder="Tu nombre">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Email *</label>
+                            <input type="email" id="email" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition" placeholder="tu@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Teléfono *</label>
+                            <input type="tel" id="telefono" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition" placeholder="+34 600 000 000">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Instrumento *</label>
+                            <select id="instrumento" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition">
+                                <option value="">Selecciona un instrumento</option>
+                                <option value="Guitarra">🎸 Guitarra</option>
+                                <option value="Piano">🎹 Piano</option>
+                                <option value="Batería">🥁 Batería</option>
+                                <option value="Violín">🎻 Violín</option>
+                                <option value="Trompeta">🎺 Trompeta</option>
+                                <option value="Canto">🎤 Canto</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Día *</label>
+                            <select id="diaSeleccionado" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition">
+                                <option value="">Selecciona un día</option>
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Sábado">Sábado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Hora *</label>
+                            <select id="horaSeleccionada" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition">
+                                <option value="">Selecciona una hora</option>
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Nivel de Experiencia</label>
+                        <select id="nivel" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition">
+                            <option value="Principiante">Principiante (sin experiencia)</option>
+                            <option value="Intermedio">Intermedio (1-2 años)</option>
+                            <option value="Avanzado">Avanzado (3+ años)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Mensaje o Comentarios</label>
+                        <textarea id="mensaje" rows="4" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-600 focus:outline-none transition" placeholder="Cuéntanos sobre tus objetivos musicales..."></textarea>
+                    </div>
+                    
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                        <p class="text-blue-700">
+                            <strong>💡 Primera clase de prueba:</strong> 50% de descuento en tu primera sesión.
+                        </p>
+                    </div>
+                    
+                    <button type="submit"  class="w-full bg-academy-black text-white py-4 rounded-lg font-bold text-lg hover:bg-academy-red transition shadow-lg">
+                        Confirmar Reserva
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="success-checkmark mb-6">
+                <div class="check-icon">
+                    <span class="icon-line line-tip"></span>
+                    <span class="icon-line line-long"></span>
+                </div>
+            </div>
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-4">¡Reserva Confirmada!</h3>
+            <p class="text-gray-600 text-center mb-6">Te hemos enviado un email con todos los detalles de tu clase. ¡Nos vemos pronto!</p>
+            <button onclick="closeModal1()" class="w-full bg-academy-black text-white py-3 rounded-lg font-bold hover:bg-academy-red transition">
+                Cerrar
+            </button>
+            <button onclick="closeModal()" class="flex-1 border-2 border-academy-black text-academy-black py-4 rounded-lg font-semibold uppercase tracking-wider hover:bg-academy-black hover:text-white transition">
+                            Cerrar
+                        </button>
+        </div>
+    </div>
 
     <!-- Pie -->
     <footer class="bg-academy-black text-white pt-16 pb-8">
@@ -656,7 +868,7 @@
             </div>
         </div>
     </footer>
-
+   
     <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/56982802442?text=Hola,%20me%20interesa%20información%20sobre%20las%20clases%20de%20música" target="_blank" class="whatsapp-btn fixed bottom-6 right-6 z-50 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
         <i class="fab fa-whatsapp text-white text-4xl"></i>
@@ -716,7 +928,7 @@
             iniciacionyexploracion: {
                 title: "Iniciación y exploración",
                 desc: "El objetivo es despertar el interés y la curiosidad de los niños por la música, mientras desarrollan sus habilidades básicas.",
-                img: "imagenes academia/iniciacion2.jpg",
+                img: "/imagenes academia/iniciacion2.jpg",
                 list: [
                     "Reconocer y aprender ritmos",
                     "Desarrollo de la coordinación",
@@ -725,15 +937,15 @@
                     "Iniciación en instrumentos para su elección según sus intereses y habilidades"
                 ],
                 gallery: [
-                    "imagenes academia/iniciacion1.jpg",
-                    "imagenes academia/iniciacion3.jpg",
-                    "imagenes academia/iniciacion4.jpg"
+                    "/imagenes academia/iniciacion1.jpg",
+                    "/imagenes academia/iniciacion3.jpg",
+                    "/imagenes academia/iniciacion4.jpg"
                 ]
             },
             canto: {
                 title: "Técnica Vocal y Performance",
                 desc: "Desarrolla tu instrumento natural. Trabajamos respiración diafragmática, apoyo, resonancia y extensión vocal. Incluye clases de actuación escénica, manejo del micrófono y grabación profesional.",
-                img: "imagenes academia/canto2.jpg",
+                img: "/imagenes academia/canto2.jpg",
                 list: [
                     "Respiración Diafragmática y Apoyo",
                     "Estilos: Lírico, Musical Theatre, Pop, Jazz",
@@ -742,33 +954,32 @@
                     "Técnica de Micrófono y Grabación"
                 ],
                 gallery: [
-                    "imagenes academia/canto2.jpg",
-                    "imagenes academia/bajo2.jpg",
-                    "imagenes academia/canto.jpeg"
+                    "/imagenes academia/canto2.jpg",
+                    "/imagenes academia/bajo2.jpg",
+                    "/imagenes academia/canto.jpeg"
                 ]
             },
             piano: {
                 title: "Piano Clásico y Contemporáneo",
                 desc: "Nuestro programa de piano abarca desde la técnica fundamental hasta la interpretación avanzada de repertorio clásico y contemporáneo. Las clases se imparten en pianos de cola Steinway & Sons en estudios acústicamente tratados.",
-                img: "imagenes academia/piano4.jpg",
+                img: "/imagenes academia/piano4.jpg",
                 list: [
                     "Técnica de Hanon y Czerny para desarrollo digital",
                     "Teoría Musical Avanzada y Armonía",
                     "Improvisación y Jazz",
                     "Preparación para exámenes de conservatorio",
                     "Interpretación de repertorio clásico y moderno"
-                ]
-                ,
+                ],
                 gallery: [
-                    "imagenes academia/piano.jpeg",
-                    "imagenes academia/piano2.jpg",
-                    "imagenes academia/piano3.jpg"
+                    "/imagenes academia/piano.jpeg",
+                    "/imagenes academia/piano2.jpg",
+                    "/imagenes academia/piano3.jpg"
                 ]
             },
             guitarra: {
                 title: "Guitarra clásica y electroacústica",
                 desc: "Explora la versatilidad de la guitarra. Desde la delicadeza del fingerstyle clásico hasta lo contemporaneo. Enfocado en la composición, la teoría armónica y la performance en vivo.",
-                img: "imagenes academia/guitarra5.JPEG",
+                img: "/imagenes academia/guitarra5.JPEG",
                 list: [
                     "Dominio técnico y teórico",
                     "Interpretación y repertorio",
@@ -781,15 +992,15 @@
                     "Performance Escénica"
                 ],
                 gallery: [
-                    "imagenes academia/guitarra2.JPEG",
-                    "imagenes academia/guitarra.JPEG",
+                    "/imagenes academia/guitarra2.JPEG",
+                    "/imagenes academia/guitarra.JPEG",
                     "imagenes academia/guitarra4.JPEG"
                 ]
             },
             ukelele: {
                 title: "Ukelele",
                 desc: "Aprende y fortalece tus habilidades en el curso de ukelele.",
-                img: "imagenes academia/guitarra5.JPEG",
+                img: "/imagenes academia/guitarra5.JPEG",
                 list: [
                     "Dominio técnico y teórico",
                     "Interpretación y repertorio",
@@ -802,15 +1013,15 @@
                     "Performance Escénica"
                 ],
                 gallery: [
-                    "imagenes academia/guitarra2.JPEG",
-                    "imagenes academia/guitarra.JPEG",
+                    "/imagenes academia/guitarra2.JPEG",
+                    "/imagenes academia/guitarra.JPEG",
                     "imagenes academia/guitarra4.JPEG"
                 ]
             },
             bajo: {
                 title: "Bajo",
                 desc: "Se el corazon de tu banda con nuestro método moderno y directo. Mejora tu técnica y conocimientos de manera fácil y rápida.",
-                img: "imagenes academia/bajo.jpg",
+                img: "/imagenes academia/bajo.jpg",
                 list: [
                     "Dominio técnico y teórico",
                     "Interpretación y repertorio",
@@ -823,15 +1034,15 @@
                     "Performance Escénica"
                 ],
                 gallery: [
-                    "imagenes academia/bajo1.jpg",
-                    "imagenes academia/bajo2.jpg",
-                    "imagenes academia/bajo3.jpg"
+                    "/imagenes academia/bajo1.jpg",
+                    "/imagenes academia/bajo2.jpg",
+                    "/imagenes academia/bajo3.jpg"
                 ]
             },
             violin: {
                 title: "Violín",
                 desc: "Amas el violín? En nuestra academia aprenderas con clases para niños, adultos y principiantes. Clásico, folclor o música popular.",
-                img: "imagenes academia/violin1.jpeg",
+                img: "/imagenes academia/violin1.jpeg",
                 list: [
                     "Dominio técnico y teórico",
                     "Manejo del arco",
@@ -844,15 +1055,15 @@
                     "Performance Escénica"
                 ],
                 gallery: [
-                    "imagenes academia/violin3.jpg",
-                    "imagenes academia/violin-cuadro.jpg",
-                    "imagenes academia/violin2.jpg"
+                    "/imagenes academia/violin3.jpg",
+                    "/imagenes academia/violin-cuadro.jpg",
+                    "/imagenes academia/violin2.jpg"
                 ]
             },
             bateria: {
                 title: "Batería",
                 desc: "Aprenderás teoría desde cero, técnicas, patrones rítmicos, coordinación, relajación y cuidados.",
-                img: "imagenes academia/bateria4.jpg",
+                img: "/imagenes academia/bateria4.jpg",
                 list: [
                     "Técnica fundamental",
                     "Lectura y teoría",
@@ -861,15 +1072,15 @@
                     "Creatividad e improvisación"
                 ],
                 gallery: [
-                    "imagenes academia/bateria1.jpg",
-                    "imagenes academia/bateria3.jpg",
-                    "imagenes academia/bateria2.jpeg"
+                    "/imagenes academia/bateria1.jpg",
+                    "/imagenes academia/bateria3.jpg",
+                    "/imagenes academia/bateria2.jpeg"
                 ]
             },
             formaciondebandas: {
                 title: "Formación de bandas",
                 desc: "Nuestro programa de piano abarca desde la técnica fundamental hasta la interpretación avanzada de repertorio clásico y contemporáneo. Las clases se imparten en pianos de cola Steinway & Sons en estudios acústicamente tratados.",
-                img: "imagenes academia/galeria1.jpg",
+                img: "/imagenes academia/galeria1.jpg",
                 list: [
                     "Técnica de Hanon y Czerny para desarrollo digital",
                     "Teoría Musical Avanzada y Armonía",
@@ -878,9 +1089,9 @@
                     "Interpretación de repertorio clásico y moderno"
                 ],
                 gallery: [
-                    "imagenes academia/formaciondebandas.jpg",
-                    "imagenes academia/grupal1.jpg",
-                    "imagenes academia/canto.jpeg"
+                    "/imagenes academia/formaciondebandas.jpg",
+                    "/imagenes academia/grupal1.jpg",
+                    "/imagenes academia/canto.jpeg"
                 ]
             }
             
@@ -957,8 +1168,183 @@
             });
         });
     </script>
+
+    <script>
+        // Time slots data
+        const timeSlotsData = {
+            lunes: [
+                { time: '09:00', available: true },
+                { time: '10:00', available: true },
+                { time: '11:00', available: false },
+                { time: '12:00', available: true },
+                { time: '16:00', available: true },
+                { time: '17:00', available: false },
+                { time: '18:00', available: true },
+                { time: '19:00', available: true },
+                { time: '20:00', available: false }
+            ],
+            martes: [
+                { time: '09:00', available: true },
+                { time: '10:00', available: false },
+                { time: '11:00', available: true },
+                { time: '12:00', available: true },
+                { time: '16:00', available: true },
+                { time: '17:00', available: true },
+                { time: '18:00', available: false },
+                { time: '19:00', available: true },
+                { time: '20:00', available: true }
+            ],
+            miercoles: [
+                { time: '09:00', available: false },
+                { time: '10:00', available: true },
+                { time: '11:00', available: true },
+                { time: '12:00', available: true },
+                { time: '16:00', available: false },
+                { time: '17:00', available: true },
+                { time: '18:00', available: true },
+                { time: '19:00', available: true },
+                { time: '20:00', available: true }
+            ],
+            jueves: [
+                { time: '09:00', available: true },
+                { time: '10:00', available: true },
+                { time: '11:00', available: true },
+                { time: '12:00', available: false },
+                { time: '16:00', available: true },
+                { time: '17:00', available: true },
+                { time: '18:00', available: true },
+                { time: '19:00', available: false },
+                { time: '20:00', available: true }
+            ],
+            viernes: [
+                { time: '09:00', available: true },
+                { time: '10:00', available: false },
+                { time: '11:00', available: false },
+                { time: '12:00', available: true },
+                { time: '16:00', available: true },
+                { time: '17:00', available: true },
+                { time: '18:00', available: true },
+                { time: '19:00', available: true },
+                { time: '20:00', available: true }
+            ],
+            sabado: [
+                { time: '10:00', available: true },
+                { time: '11:00', available: true },
+                { time: '12:00', available: true },
+                { time: '16:00', available: false },
+                { time: '17:00', available: true },
+                { time: '18:00', available: true }
+            ]
+        };
+
+        let selectedDay = 'lunes';
+        let selectedTime = null;
+
+        // Initialize time slots
+        function renderTimeSlots(day) {
+            const container = document.getElementById('timeSlots');
+            container.innerHTML = '';
+            
+            const slots = timeSlotsData[day];
+            slots.forEach(slot => {
+                const button = document.createElement('button');
+                button.className = `time-slot p-3 rounded-lg font-medium border-2 ${
+                    slot.available ? 'available' : 'unavailable'
+                } ${selectedTime === slot.time ? 'selected' : ''}`;
+                button.textContent = slot.time;
+                button.disabled = !slot.available;
+                
+                if (slot.available) {
+                    button.onclick = () => selectTime(slot.time);
+                }
+                
+                container.appendChild(button);
+            });
+        }
+
+        function selectDay(day) {
+            selectedDay = day;
+            selectedTime = null;
+            
+            // Update button styles
+            document.querySelectorAll('.day-btn').forEach(btn => {
+                if (btn.dataset.day === day) {
+                    btn.className = 'day-btn px-4 py-2 rounded-full border-2  bg-academy-black text-white transition font-medium';
+                } else {
+                    btn.className = 'day-btn px-4 py-2 rounded-full border-2 border-gray-300 text-gray-600 hover:border-primary-600 hover:text-primary-600 transition font-medium';
+                }
+            });
+            
+            // Update form select
+            const dayNames = {
+                lunes: 'Lunes',
+                martes: 'Martes',
+                miercoles: 'Miércoles',
+                jueves: 'Jueves',
+                viernes: 'Viernes',
+                sabado: 'Sábado'
+            };
+            document.getElementById('diaSeleccionado').value = dayNames[day];
+            
+            renderTimeSlots(day);
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            document.getElementById('horaSeleccionada').value = time;
+            renderTimeSlots(selectedDay);
+        }
+
+        function selectInstrument(instrument) {
+            document.getElementById('instrumento').value = instrument;
+            scrollToSection('reservar');
+        }
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleBooking(event) {
+            event.preventDefault();
+            
+            // Validate that day and time are selected
+            const dia = document.getElementById('diaSeleccionado').value;
+            const hora = document.getElementById('horaSeleccionada').value;
+            
+            if (!dia || !hora) {
+                alert('Por favor, selecciona un día y una hora en la sección de Horarios');
+                scrollToSection('horarios');
+                return;
+            }
+            
+            // Show success modal
+            document.getElementById('successModal').classList.add('active');
+            
+            // Reset form
+            document.getElementById('bookingForm').reset();
+            selectedTime = null;
+            renderTimeSlots(selectedDay);
+        }
+
+        function closeModal1() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal1();
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            selectDay('lunes');
+        });
+
+       
+        
+    </script>
+
 </body>
-
 </html>
-
-
